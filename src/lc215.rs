@@ -1,5 +1,3 @@
-use std::collections::BinaryHeap;
-
 use crate::solution::Solution;
 
 const MAX_VALUE: i32 = 10000;
@@ -21,5 +19,31 @@ impl Solution {
         }
 
         res - MAX_VALUE
+    }
+}
+
+#[test]
+fn test() {
+    struct Test {
+        nums: Vec<i32>,
+        k: i32,
+        expected: i32,
+    }
+
+    let tests = vec![
+        Test {
+            nums: vec![3, 2, 1, 5, 6, 4],
+            k: 2,
+            expected: 5,
+        },
+        Test {
+            nums: vec![3, 2, 3, 1, 2, 4, 5, 5, 6],
+            k: 4,
+            expected: 4,
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::find_kth_largest(t.nums, t.k), t.expected);
     }
 }

@@ -33,3 +33,32 @@ impl Solution {
         (chars, count)
     }
 }
+
+#[test]
+fn test_maximum_gain() {
+    struct Test {
+        s: String,
+        x: i32,
+        y: i32,
+        expected: i32,
+    }
+
+    let tests = vec![
+        Test {
+            s: "cdbcbbaaabab".to_string(),
+            x: 4,
+            y: 5,
+            expected: 19,
+        },
+        Test {
+            s: "aabbaaxybbaabb".to_string(),
+            x: 5,
+            y: 4,
+            expected: 20,
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::maximum_gain(t.s, t.x, t.y), t.expected);
+    }
+}

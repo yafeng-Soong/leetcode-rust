@@ -16,3 +16,37 @@ impl Solution {
         true
     }
 }
+
+#[test]
+fn test_can_construct() {
+    struct Test {
+        ransom_note: String,
+        magazine: String,
+        expected: bool,
+    }
+
+    let tests = vec![
+        Test {
+            ransom_note: "a".to_string(),
+            magazine: "b".to_string(),
+            expected: false,
+        },
+        Test {
+            ransom_note: "aa".to_string(),
+            magazine: "ab".to_string(),
+            expected: false,
+        },
+        Test {
+            ransom_note: "aa".to_string(),
+            magazine: "aab".to_string(),
+            expected: true,
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(
+            Solution::can_construct(t.ransom_note, t.magazine),
+            t.expected
+        );
+    }
+}

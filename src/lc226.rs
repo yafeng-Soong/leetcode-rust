@@ -16,7 +16,7 @@ impl Solution {
         }
     }
 
-    pub fn invert_tree2(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn invert_tree_loop(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
         let node = match root.clone() {
             None => return None,
             Some(node) => node,
@@ -39,5 +39,49 @@ impl Solution {
         }
 
         root
+    }
+}
+
+#[test]
+fn test_invert_tree() {
+    struct Test {
+        root: Option<Rc<RefCell<TreeNode>>>,
+        root_loop: Option<Rc<RefCell<TreeNode>>>,
+        expected: Option<Rc<RefCell<TreeNode>>>,
+    }
+
+    let tests = vec![Test {
+        root: TreeNode::from_vec(&[
+            Some(4),
+            Some(2),
+            Some(7),
+            Some(1),
+            Some(3),
+            Some(6),
+            Some(9),
+        ]),
+        root_loop: TreeNode::from_vec(&[
+            Some(4),
+            Some(2),
+            Some(7),
+            Some(1),
+            Some(3),
+            Some(6),
+            Some(9),
+        ]),
+        expected: TreeNode::from_vec(&[
+            Some(4),
+            Some(7),
+            Some(2),
+            Some(9),
+            Some(6),
+            Some(3),
+            Some(1),
+        ]),
+    }];
+
+    for t in tests {
+        assert_eq!(Solution::invert_tree(t.root.clone()), t.expected);
+        assert_eq!(Solution::invert_tree_loop(t.root_loop.clone()), t.expected);
     }
 }

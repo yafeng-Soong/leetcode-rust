@@ -16,3 +16,29 @@ impl Solution {
         if sum < 0 { -1 } else { res }
     }
 }
+
+#[test]
+fn test() {
+    struct Test {
+        gas: Vec<i32>,
+        cost: Vec<i32>,
+        expected: i32,
+    }
+
+    let tests = vec![
+        Test {
+            gas: vec![1, 2, 3, 4, 5],
+            cost: vec![3, 4, 5, 1, 2],
+            expected: 3,
+        },
+        Test {
+            gas: vec![2, 3, 4],
+            cost: vec![3, 4, 3],
+            expected: -1,
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::can_complete_circuit(t.gas, t.cost), t.expected);
+    }
+}

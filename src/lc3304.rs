@@ -21,3 +21,26 @@ impl Solution {
         }
     }
 }
+
+#[test]
+fn test_kth_character() {
+    struct Test {
+        k: i32,
+        expected: char,
+    }
+
+    let tests = vec![
+        Test {
+            k: 5,
+            expected: 'b',
+        },
+        Test {
+            k: 10,
+            expected: 'c',
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::kth_character(t.k), t.expected);
+    }
+}

@@ -25,3 +25,34 @@ impl Solution {
         }
     }
 }
+
+#[test]
+fn test() {
+    struct Test {
+        root: Option<Rc<RefCell<TreeNode>>>,
+        expected: bool,
+    }
+
+    let tests = vec![
+        Test {
+            root: TreeNode::from_vec(&[
+                Some(1),
+                Some(2),
+                Some(2),
+                Some(3),
+                Some(4),
+                Some(4),
+                Some(3),
+            ]),
+            expected: true,
+        },
+        Test {
+            root: TreeNode::from_vec(&[Some(1), Some(2), Some(2), None, Some(3), None, Some(3)]),
+            expected: false,
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::is_symmetric(t.root), t.expected);
+    }
+}

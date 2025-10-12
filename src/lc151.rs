@@ -7,3 +7,26 @@ impl Solution {
         words.join(" ")
     }
 }
+
+#[test]
+fn test() {
+    struct Test {
+        s: String,
+        expected: String,
+    }
+
+    let tests = vec![
+        Test {
+            s: "the sky is blue".to_string(),
+            expected: "blue is sky the".to_string(),
+        },
+        Test {
+            s: "  hello world!  ".to_string(),
+            expected: "world! hello".to_string(),
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::reverse_words(t.s), t.expected);
+    }
+}

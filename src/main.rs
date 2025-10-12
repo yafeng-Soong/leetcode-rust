@@ -1,3 +1,4 @@
+#![allow(unused_assignments, unused_mut)]
 mod lc100;
 mod lc101;
 mod lc104;

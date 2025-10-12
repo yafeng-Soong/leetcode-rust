@@ -19,3 +19,26 @@ impl Solution {
         s.get(start..=end).unwrap().to_string()
     }
 }
+
+#[test]
+fn test() {
+    struct Test {
+        s: String,
+        expected: String,
+    }
+
+    let tests = vec![
+        Test {
+            s: "babad".to_string(),
+            expected: "bab".to_string(),
+        },
+        Test {
+            s: "cbbd".to_string(),
+            expected: "bb".to_string(),
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::longest_palindrome(t.s), t.expected);
+    }
+}

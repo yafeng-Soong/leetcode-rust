@@ -39,3 +39,26 @@ impl Solution {
         res
     }
 }
+
+#[test]
+fn test() {
+    struct Test {
+        height: Vec<i32>,
+        expected: i32,
+    }
+
+    let tests = vec![
+        Test {
+            height: vec![0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1],
+            expected: 6,
+        },
+        Test {
+            height: vec![4, 2, 0, 3, 2, 5],
+            expected: 9,
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::trap(t.height), t.expected);
+    }
+}
