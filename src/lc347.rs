@@ -7,8 +7,7 @@ impl Solution {
         let n = nums.len();
         let mut cnts = HashMap::new();
         for i in 0..n {
-            let idx = nums[i];
-            cnts.entry(idx).and_modify(|x| *x += 1).or_insert(1);
+            cnts.entry(nums[i]).and_modify(|x| *x += 1).or_insert(1);
         }
 
         let mut tmp = cnts
