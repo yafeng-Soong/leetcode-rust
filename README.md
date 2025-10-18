@@ -1,3 +1,4 @@
+**Read this in other languages: [[English](README_en.md), [中文](README.md)].**
 # LeetCode Rust 题解
 
 这是一个用 Rust 语言实现的 LeetCode 算法题解仓库。
