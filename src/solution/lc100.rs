@@ -1,4 +1,4 @@
-use crate::{solution::Solution, treenode::TreeNode};
+use crate::{solution::Solution, utils::treenode::TreeNode};
 
 use std::{cell::RefCell, rc::Rc};
 impl Solution {

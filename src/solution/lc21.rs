@@ -1,4 +1,4 @@
-use crate::{listnode::ListNode, solution::Solution};
+use crate::{solution::Solution, utils::listnode::ListNode};
 
 impl Solution {
     pub fn merge_two_lists(
@@ -38,7 +38,7 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::listnode::build_listnode;
+    use crate::utils::listnode::build_listnode;
     struct Test {
         list1: Option<Box<ListNode>>,
         list2: Option<Box<ListNode>>,

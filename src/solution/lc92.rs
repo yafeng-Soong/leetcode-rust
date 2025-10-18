@@ -1,4 +1,4 @@
-use crate::{listnode::ListNode, solution::Solution};
+use crate::{solution::Solution, utils::listnode::ListNode};
 
 impl Solution {
     pub fn reverse_between(
@@ -35,7 +35,7 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::listnode::build_listnode;
+    use crate::utils::listnode::build_listnode;
     struct Test {
         head: Vec<i32>,
         left: i32,

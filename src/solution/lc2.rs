@@ -1,4 +1,5 @@
-use crate::{listnode::ListNode, solution::Solution};
+use crate::solution::Solution;
+use crate::utils::listnode::ListNode;
 impl Solution {
     pub fn add_two_numbers(
         l1: Option<Box<ListNode>>,
@@ -51,7 +52,7 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::listnode::build_listnode;
+    use crate::utils::listnode::build_listnode;
 
     struct Test {
         l1: Vec<i32>,
