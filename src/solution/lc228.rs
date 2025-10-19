@@ -1,26 +1,25 @@
-mod lc228 {
-    pub struct Solution;
-    impl Solution {
-        pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
-            let mut res = Vec::new();
-            let mut left = 0;
-            let mut right = 0;
-            let n = nums.len();
-            while left < n {
-                while right < n && nums[right] - nums[left] == (right - left) as i32 {
-                    right += 1;
-                }
+use crate::solution::Solution;
 
-                res.push(if right - left == 1 {
-                    nums[left].to_string()
-                } else {
-                    format!("{}->{}", nums[left], nums[right - 1])
-                });
-                left = right;
+impl Solution {
+    pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
+        let mut res = Vec::new();
+        let mut left = 0;
+        let mut right = 0;
+        let n = nums.len();
+        while left < n {
+            while right < n && nums[right] - nums[left] == (right - left) as i32 {
+                right += 1;
             }
 
-            res
+            res.push(if right - left == 1 {
+                nums[left].to_string()
+            } else {
+                format!("{}->{}", nums[left], nums[right - 1])
+            });
+            left = right;
         }
+
+        res
     }
 }
 
@@ -46,6 +45,6 @@ fn test() {
         },
     ];
     for test in tests {
-        assert_eq!(lc228::Solution::summary_ranges(test.nums), test.expect);
+        assert_eq!(Solution::summary_ranges(test.nums), test.expect);
     }
 }

@@ -1,34 +1,32 @@
-mod lc56 {
-    use std::cmp::max;
+use crate::solution::Solution;
+use std::cmp::max;
 
-    pub struct Solution;
-    impl Solution {
-        pub fn merge(mut intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-            let mut res = Vec::new();
-            intervals.sort_by(|a, b| {
-                if a[0] == b[0] {
-                    b[1].cmp(&a[1])
-                } else {
-                    a[0].cmp(&b[0])
-                }
-            });
+impl Solution {
+    pub fn merge(mut intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let mut res = Vec::new();
+        intervals.sort_by(|a, b| {
+            if a[0] == b[0] {
+                b[1].cmp(&a[1])
+            } else {
+                a[0].cmp(&b[0])
+            }
+        });
 
-            let mut left = 0;
-            let mut right = 0;
-            let n = intervals.len();
-            while left < n {
-                let mut upper = intervals[left][1];
-                while right < n && intervals[right][0] <= upper {
-                    upper = max(upper, intervals[right][1]);
-                    right += 1;
-                }
-
-                res.push(vec![intervals[left][0], upper]);
-                left = right;
+        let mut left = 0;
+        let mut right = 0;
+        let n = intervals.len();
+        while left < n {
+            let mut upper = intervals[left][1];
+            while right < n && intervals[right][0] <= upper {
+                upper = max(upper, intervals[right][1]);
+                right += 1;
             }
 
-            res
+            res.push(vec![intervals[left][0], upper]);
+            left = right;
         }
+
+        res
     }
 }
 
@@ -69,6 +67,6 @@ fn test() {
     ];
 
     for test in tests {
-        assert_eq!(lc56::Solution::merge(test.intervals), test.expect);
+        assert_eq!(Solution::merge(test.intervals), test.expect);
     }
 }
