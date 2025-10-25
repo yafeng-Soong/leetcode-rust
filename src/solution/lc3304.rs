@@ -13,10 +13,10 @@ impl Solution {
     }
 
     fn transform(words: &mut Vec<char>) {
-        let chars = words.iter().map(|c| *c).collect::<Vec<_>>();
+        let chars = words.to_vec();
         for c in chars.iter() {
-            let offset = (*c as u8 - 'a' as u8 + 1) % 26;
-            let next = ('a' as u8 + offset) as char;
+            let offset = (*c as u8 - b'a' + 1) % 26;
+            let next = (b'a' + offset) as char;
             words.push(next);
         }
     }

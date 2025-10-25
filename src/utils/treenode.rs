@@ -27,7 +27,7 @@ impl TreeNode {
         let mut queue = std::collections::VecDeque::new();
         queue.push_back(root.clone().unwrap());
         let mut i = 1;
-        while queue.len() > 0 && i < n {
+        while !queue.is_empty() && i < n {
             let node = queue.pop_front().unwrap();
             if let Some(val) = v[i] {
                 node.borrow_mut().left = Some(Rc::new(RefCell::new(TreeNode::new(val))));

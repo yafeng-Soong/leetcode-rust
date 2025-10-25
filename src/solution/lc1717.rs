@@ -6,11 +6,11 @@ impl Solution {
         let (count_x, count_y): (i32, i32);
         let mut chars = s.as_bytes().to_vec();
         if x >= y {
-            (chars, count_x) = Self::erease(chars, 'a' as u8, 'b' as u8);
-            (_, count_y) = Self::erease(chars, 'b' as u8, 'a' as u8);
+            (chars, count_x) = Self::erease(chars, b'a', b'b');
+            (_, count_y) = Self::erease(chars, b'b', b'a');
         } else {
-            (chars, count_y) = Self::erease(chars, 'b' as u8, 'a' as u8);
-            (_, count_x) = Self::erease(chars, 'a' as u8, 'b' as u8);
+            (chars, count_y) = Self::erease(chars, b'b', b'a');
+            (_, count_x) = Self::erease(chars, b'a', b'b');
         }
 
         x * count_x + y * count_y
@@ -20,7 +20,7 @@ impl Solution {
         let mut count = 0;
         let mut stack = VecDeque::new();
         for c in chars {
-            if stack.len() > 0 && stack.back() == Some(&lc) && c == rc {
+            if !stack.is_empty() && stack.back() == Some(&lc) && c == rc {
                 stack.pop_back();
                 count += 1;
                 continue;
@@ -29,7 +29,7 @@ impl Solution {
             stack.push_back(c);
         }
 
-        let chars = stack.iter().map(|x| *x).collect::<Vec<_>>();
+        let chars = stack.iter().cloned().collect::<Vec<_>>();
         (chars, count)
     }
 }
