@@ -9,8 +9,8 @@ impl Solution {
         let n = nums.len();
         let (mut pre_prod, mut suf_prod) = (1, 1);
         for i in 0..n {
-            nums[i] = pre_prod * nums[i];
-            res[n - i - 1] = suf_prod * res[n - i - 1];
+            nums[i] *= pre_prod;
+            res[n - i - 1] *= suf_prod;
             pre_prod = nums[i];
             suf_prod = res[n - i - 1];
         }

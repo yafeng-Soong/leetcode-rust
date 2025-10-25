@@ -17,14 +17,11 @@ impl Solution {
     }
 
     pub fn invert_tree_loop(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        let node = match root.clone() {
-            None => return None,
-            Some(node) => node,
-        };
+        let node = root.clone()?;
 
         let mut queue = std::collections::VecDeque::new();
         queue.push_back(node);
-        while queue.len() > 0 {
+        while !queue.is_empty() {
             let top = queue.pop_front().unwrap();
             let (left, right) = (top.borrow().left.clone(), top.borrow().right.clone());
 

@@ -7,7 +7,7 @@ impl Solution {
         let mut res = Vec::new();
         let size: usize = words.iter().map(|w| w.len()).sum();
         let (mut word_cnts, mut word_map) = (HashMap::new(), HashMap::new());
-        for (_, word) in words.iter().enumerate() {
+        for word in words.iter() {
             word_cnts
                 .entry(word.as_str())
                 .and_modify(|x| *x += 1)
@@ -34,7 +34,7 @@ impl Solution {
     }
 
     fn is_sub(s: &str, word_cnts: &HashMap<&str, i32>) -> bool {
-        if s.len() == 0 {
+        if s.is_empty() {
             return true;
         }
 
@@ -43,10 +43,10 @@ impl Solution {
                 continue;
             }
 
-            if s.starts_with(word) {
+            if let Some(end) = s.strip_prefix(word) {
                 let mut new_cnts = word_cnts.clone();
-                new_cnts.insert(&word, cnt - 1);
-                if Self::is_sub(&s[word.len()..], &new_cnts) {
+                new_cnts.insert(word, cnt - 1);
+                if Self::is_sub(end, &new_cnts) {
                     return true;
                 }
             }

@@ -23,7 +23,7 @@ impl MedianFinder {
             self.min_heap.push(Reverse(x));
         }
 
-        if self.min_heap.len() > 0
+        if !self.min_heap.is_empty()
             && self.max_heap.peek().unwrap() > &self.min_heap.peek().unwrap().0
         {
             let (a, b) = (self.max_heap.pop().unwrap(), self.min_heap.pop().unwrap().0);
@@ -41,6 +41,6 @@ impl MedianFinder {
             return (a + b) as f64 / 2.0;
         }
 
-        return *self.max_heap.peek().unwrap() as f64;
+        *self.max_heap.peek().unwrap() as f64
     }
 }

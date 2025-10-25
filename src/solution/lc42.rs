@@ -30,8 +30,8 @@ impl Solution {
         while idx < n - 1 {
             next = right_idx[idx];
             let h = min(height[idx], height[next]);
-            for i in idx + 1..next {
-                res += h - height[i];
+            for item in height[idx + 1..next].iter() {
+                res += h - item;
             }
             idx = next;
         }

@@ -17,7 +17,7 @@ impl Solution {
             }
 
             let mut times = 0_usize;
-            while end < n && chars[end].is_digit(10) {
+            while end < n && chars[end].is_ascii_digit() {
                 times = times * 10 + chars[end].to_digit(10).unwrap() as usize;
                 end += 1;
             }

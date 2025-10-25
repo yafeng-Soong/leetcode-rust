@@ -1,3 +1,4 @@
+#![allow(clippy::manual_div_ceil)]
 use crate::solution::Solution;
 
 impl Solution {

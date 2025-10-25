@@ -4,29 +4,25 @@ use std::collections::BinaryHeap;
 
 impl Solution {
     pub fn k_smallest_pairs(nums1: Vec<i32>, nums2: Vec<i32>, k: i32) -> Vec<Vec<i32>> {
-        let (m, n) = (nums1.len(), nums2.len());
         let mut heap = BinaryHeap::new();
-        for i in 0..m {
+        for num1 in nums1 {
             let tmp = Pair {
-                a: nums1[i],
+                a: num1,
                 b: nums2[0],
             };
-            if heap.len() >= k as usize && tmp.cmp(&heap.peek().unwrap()) == Ordering::Greater {
+            if heap.len() >= k as usize && tmp.cmp(heap.peek().unwrap()) == Ordering::Greater {
                 break;
             }
 
-            for j in 0..n {
-                let pair = Pair {
-                    a: nums1[i],
-                    b: nums2[j],
-                };
+            for &num2 in &nums2 {
+                let pair = Pair { a: num1, b: num2 };
 
                 if heap.len() < k as usize {
                     heap.push(pair);
                     continue;
                 }
 
-                match pair.cmp(&heap.peek().unwrap()) {
+                match pair.cmp(heap.peek().unwrap()) {
                     Ordering::Less => {
                         heap.pop();
                         heap.push(pair);
@@ -91,7 +87,7 @@ fn test_k_smallest_pairs() {
 
     for t in tests {
         let mut res = Solution::k_smallest_pairs(t.nums1, t.nums2, t.k);
-        res.sort_by(|a, b| a.cmp(b));
+        res.sort();
         assert_eq!(res, t.expected);
     }
 }

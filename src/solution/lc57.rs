@@ -5,13 +5,13 @@ impl Solution {
         let mut res = Vec::new();
         let n = intervals.len();
         let (mut left, mut right) = (-1, n);
-        for i in 0..n {
-            if intervals[i][1] < new_interval[0] {
+        for (i, interval) in intervals.iter().enumerate() {
+            if interval[1] < new_interval[0] {
                 left = i as i32;
                 continue;
             }
 
-            if intervals[i][0] > new_interval[1] {
+            if interval[0] > new_interval[1] {
                 right = i;
                 break;
             }

@@ -22,18 +22,42 @@ impl Solution {
                 idx += 1;
             }
 
-            if heap.len() == 0 {
+            if heap.is_empty() {
                 break;
             }
 
-            println!("{:?}", heap);
             res += heap.pop().unwrap();
         }
+
         res
     }
 }
 
 #[test]
 fn test() {
-    Solution::find_maximized_capital(2, 0, vec![1, 2, 3], vec![0, 1, 1]);
+    struct Test {
+        k: i32,
+        w: i32,
+        profits: Vec<i32>,
+        capital: Vec<i32>,
+    }
+
+    let test_cases = vec![
+        Test {
+            k: 2,
+            w: 0,
+            profits: vec![1, 2, 3],
+            capital: vec![0, 1, 1],
+        },
+        Test {
+            k: 3,
+            w: 0,
+            profits: vec![1, 2, 3],
+            capital: vec![0, 1, 2],
+        },
+    ];
+
+    for test in test_cases {
+        Solution::find_maximized_capital(test.k, test.w, test.profits, test.capital);
+    }
 }
