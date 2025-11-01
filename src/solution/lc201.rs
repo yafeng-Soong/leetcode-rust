@@ -15,3 +15,34 @@ impl Solution {
         res
     }
 }
+
+#[test]
+fn test() {
+    struct Test {
+        left: i32,
+        right: i32,
+        expected: i32,
+    }
+
+    let tests = vec![
+        Test {
+            left: 5,
+            right: 7,
+            expected: 4,
+        },
+        Test {
+            left: 0,
+            right: 0,
+            expected: 0,
+        },
+        Test {
+            left: 1,
+            right: 2,
+            expected: 0,
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::range_bitwise_and(t.left, t.right), t.expected);
+    }
+}
