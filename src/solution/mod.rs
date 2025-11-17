@@ -61,6 +61,7 @@ mod lc69;
 mod lc70;
 mod lc73;
 mod lc74;
+mod lc76;
 mod lc9;
 mod lc92;
 pub struct Solution {}
