@@ -8,11 +8,10 @@ impl Solution {
         let n = height.len();
         let mut right_idx = vec![0; n];
         let mut stack = VecDeque::new();
-        for i in 0..n {
-            while let Some(&top) = stack.back() {
-                if height[top] > height[i] {
-                    break;
-                }
+        for (i, &h) in height.iter().enumerate() {
+            while let Some(&top) = stack.back()
+                && height[top] <= h
+            {
                 right_idx[top] = i;
                 stack.pop_back();
             }

@@ -4,32 +4,69 @@ impl Solution {
     pub fn int_to_roman(num: i32) -> String {
         let mut romans = Vec::new();
         let mut num = num;
-        let mut i: usize = 1;
+        let base_char = &[
+            &["I", "V", "X"],
+            &["X", "L", "C"],
+            &["C", "D", "M"],
+            &["M", "M", "M"],
+        ];
+        let mut iter = base_char.iter();
         while num > 0 {
             let x = (num % 10) as usize;
+            let base = iter.next().unwrap();
             romans.insert(
                 0,
-                match (x, i) {
-                    (y, 1) if y <= 3 => "I".repeat(y),
-                    (4, 1) => "IV".to_string(),
-                    (y, 1) if y > 4 && y < 9 => String::from("V") + &"I".repeat(y - 5),
-                    (9, 1) => "IX".to_string(),
-                    (y, 10) if y <= 3 => "X".repeat(y),
-                    (4, 10) => "XL".to_string(),
-                    (y, 10) if y > 4 && y < 9 => String::from("L") + &"X".repeat(y - 5),
-                    (9, 10) => "XC".to_string(),
-                    (y, 100) if y <= 3 => "C".repeat(y),
-                    (4, 100) => "CD".to_string(),
-                    (y, 100) if y > 4 && y < 9 => String::from("D") + &"C".repeat(y - 5),
-                    (9, 100) => "CM".to_string(),
-                    (y, 1000) if y <= 3 => "M".repeat(y),
-                    (_, _) => String::new(),
+                match x {
+                    y if y <= 3 => base[0].repeat(y),
+                    4 => String::from(base[0]) + base[1],
+                    y if y > 4 && y < 9 => String::from(base[1]) + &base[0].repeat(y - 5),
+                    9 => String::from(base[0]) + base[2],
+                    _ => String::new(),
                 },
             );
 
-            (i, num) = (i * 10, num / 10);
+            num /= 10;
         }
 
         romans.join("")
+    }
+}
+
+#[test]
+fn test() {
+    struct Test {
+        num: i32,
+        expected: String,
+    }
+
+    let tests = vec![
+        Test {
+            num: 3,
+            expected: "III".to_string(),
+        },
+        Test {
+            num: 4,
+            expected: "IV".to_string(),
+        },
+        Test {
+            num: 9,
+            expected: "IX".to_string(),
+        },
+        Test {
+            num: 58,
+            expected: "LVIII".to_string(),
+        },
+        Test {
+            num: 1994,
+            expected: "MCMXCIV".to_string(),
+        },
+        Test {
+            num: 3020,
+            expected: "MMMXX".to_string(),
+        },
+    ];
+
+    for t in tests {
+        assert_eq!(Solution::int_to_roman(t.num), t.expected);
     }
 }
