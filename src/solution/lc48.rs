@@ -3,11 +3,11 @@ use crate::solution::Solution;
 impl Solution {
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
         let n = matrix.len();
-        for i in 0..n {
-            for j in i..n {
+        (0..n).for_each(|i| {
+            (i..n).for_each(|j| {
                 (matrix[i][j], matrix[j][i]) = (matrix[j][i], matrix[i][j]);
-            }
-        }
+            });
+        });
 
         for row in matrix {
             let (mut left, mut right) = (0, n - 1);
