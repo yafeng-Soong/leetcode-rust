@@ -6,6 +6,7 @@ mod lc105;
 mod lc12;
 mod lc120;
 mod lc122;
+mod lc1277;
 mod lc13;
 mod lc1338;
 mod lc134;
@@ -72,4 +73,5 @@ mod lc74;
 mod lc76;
 mod lc9;
 mod lc92;
+mod lc97;
 pub struct Solution {}

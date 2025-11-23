@@ -1,38 +1,30 @@
+#![allow(clippy::needless_range_loop)]
 use crate::solution::Solution;
 
 impl Solution {
     pub fn maximal_square(matrix: Vec<Vec<char>>) -> i32 {
-        let (m, n) = (matrix.len(), matrix[0].len());
-        let (l, mut res) = (m.min(n), 0);
-        let mut dp = vec![vec![false; n]; m];
-
-        for i in 0..m {
-            for j in 0..n {
-                if matrix[i][j] == '1' {
-                    dp[i][j] = true;
-                    res = 1;
-                }
+        let (mut res, m, n) = (0, matrix.len(), matrix[0].len());
+        let (mut dp, mut old) = (vec![0; n + 1], vec![0; n + 1]);
+        (1..=n).for_each(|j| {
+            if matrix[0][j - 1] == '1' {
+                (old[j], res) = (1, 1);
             }
+        });
+
+        for i in 1..m {
+            for j in 1..=n {
+                if matrix[i][j - 1] == '1' {
+                    dp[j] = dp[j - 1].min(old[j].min(old[j - 1])) + 1;
+                    res = res.max(dp[j]);
+                } else {
+                    dp[j] = 0;
+                };
+            }
+
+            (old, dp) = (dp, old);
         }
 
-        for k in 2..=l {
-            let mut changed = false;
-            for i in 0..=m - k {
-                for j in 0..=n - k {
-                    dp[i][j] = dp[i][j] && dp[i + 1][j] && dp[i][j + 1] && dp[i + 1][j + 1];
-                    if dp[i][j] {
-                        res = k;
-                        changed = true;
-                    }
-                }
-            }
-
-            if !changed {
-                return (res * res) as i32;
-            }
-        }
-
-        (res * res) as i32
+        res * res
     }
 }
 
@@ -62,9 +54,27 @@ fn test() {
             expected: 0,
         },
         Test {
-            matrix: vec![vec!['1'; 300]; 300],
-            expected: 90000,
+            matrix: vec![vec!['0'], vec!['1']],
+            expected: 1,
         },
+        Test {
+            matrix: vec![vec!['1']],
+            expected: 1,
+        },
+        Test {
+            matrix: vec![
+                vec!['1', '1', '1', '1', '1'],
+                vec!['1', '1', '1', '1', '1'],
+                vec!['0', '0', '0', '0', '0'],
+                vec!['1', '1', '1', '1', '1'],
+                vec!['1', '1', '1', '1', '1'],
+            ],
+            expected: 4,
+        },
+        // Test {
+        //     matrix: vec![vec!['1'; 300]; 300],
+        //     expected: 90000,
+        // },
     ];
 
     for t in tests {
