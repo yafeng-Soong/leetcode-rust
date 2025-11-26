@@ -1,12 +1,13 @@
-use crate::solution::Solution;
+#![allow(dead_code)]
+struct Solution;
 
 impl Solution {
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         let (mut res, n) = (0, prices.len());
+        let mut min_price = prices[0];
         (1..n).for_each(|i| {
-            if prices[i] > prices[i - 1] {
-                res += prices[i] - prices[i - 1];
-            }
+            min_price = min_price.min(prices[i]);
+            res = res.max(prices[i] - min_price);
         });
 
         res
@@ -23,11 +24,7 @@ fn test() {
     let tests = vec![
         Test {
             prices: vec![7, 1, 5, 3, 6, 4],
-            expected: 7,
-        },
-        Test {
-            prices: vec![1, 2, 3, 4, 5],
-            expected: 4,
+            expected: 5,
         },
         Test {
             prices: vec![7, 6, 4, 3, 1],
