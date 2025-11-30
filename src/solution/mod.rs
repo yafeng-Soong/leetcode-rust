@@ -54,6 +54,7 @@ mod lc373;
 mod lc378;
 mod lc383;
 mod lc394;
+mod lc4;
 mod lc42;
 mod lc48;
 mod lc5;
