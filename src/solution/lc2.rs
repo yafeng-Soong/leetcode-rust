@@ -52,8 +52,6 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::utils::listnode::build_listnode;
-
     struct Test {
         l1: Vec<i32>,
         l2: Vec<i32>,
@@ -87,9 +85,9 @@ fn test() {
         },
     ];
     for t in tests {
-        let l1 = build_listnode(t.l1);
-        let l2 = build_listnode(t.l2);
-        let expected = build_listnode(t.expected);
+        let l1 = ListNode::build_listnode(t.l1);
+        let l2 = ListNode::build_listnode(t.l2);
+        let expected = ListNode::build_listnode(t.expected);
         assert_eq!(Solution::add_two_numbers(l1, l2), expected);
     }
 }

@@ -45,8 +45,6 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::utils::listnode::build_listnode;
-
     struct Test {
         input: Vec<Vec<i32>>,
         expected: Option<Box<ListNode>>,
@@ -55,28 +53,28 @@ fn test() {
     let tests = vec![
         Test {
             input: vec![vec![1, 4, 5], vec![1, 3, 4], vec![2, 6]],
-            expected: build_listnode(vec![1, 1, 2, 3, 4, 4, 5, 6]),
+            expected: ListNode::build_listnode(vec![1, 1, 2, 3, 4, 4, 5, 6]),
         },
         Test {
             input: vec![],
-            expected: build_listnode(vec![]),
+            expected: ListNode::build_listnode(vec![]),
         },
         Test {
             input: vec![vec![]],
-            expected: build_listnode(vec![]),
+            expected: ListNode::build_listnode(vec![]),
         },
         Test {
             input: vec![vec![1], vec![2], vec![3]],
-            expected: build_listnode(vec![1, 2, 3]),
+            expected: ListNode::build_listnode(vec![1, 2, 3]),
         },
         Test {
             input: vec![vec![], vec![], vec![]],
-            expected: build_listnode(vec![]),
+            expected: ListNode::build_listnode(vec![]),
         },
     ];
 
     for t in tests {
-        let lists = t.input.into_iter().map(build_listnode).collect();
+        let lists = t.input.into_iter().map(ListNode::build_listnode).collect();
         let result = Solution::merge_k_lists(lists);
         assert_eq!(result, t.expected);
     }

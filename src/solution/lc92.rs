@@ -35,7 +35,6 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::utils::listnode::build_listnode;
     struct Test {
         head: Vec<i32>,
         left: i32,
@@ -49,8 +48,8 @@ fn test() {
         expected: vec![1, 4, 3, 2, 5],
     }];
     for test in tests {
-        let head = build_listnode(test.head);
-        let expected = build_listnode(test.expected);
+        let head = ListNode::build_listnode(test.head);
+        let expected = ListNode::build_listnode(test.expected);
         let actual = Solution::reverse_between(head, test.left, test.right);
         assert_eq!(actual, expected);
     }

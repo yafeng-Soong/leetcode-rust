@@ -16,20 +16,18 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::utils::listnode::build_listnode;
-
-    let mut head = build_listnode(vec![1, 2, 3, 4, 5]);
-    let mut want = build_listnode(vec![5, 4, 3, 2, 1]);
+    let mut head = ListNode::build_listnode(vec![1, 2, 3, 4, 5]);
+    let mut want = ListNode::build_listnode(vec![5, 4, 3, 2, 1]);
     let mut res = Solution::reverse_list(head);
     assert_eq!(res, want);
 
-    head = build_listnode(vec![1, 2]);
-    want = build_listnode(vec![2, 1]);
+    head = ListNode::build_listnode(vec![1, 2]);
+    want = ListNode::build_listnode(vec![2, 1]);
     res = Solution::reverse_list(head);
     assert_eq!(res, want);
 
-    head = build_listnode(vec![]);
-    want = build_listnode(vec![]);
+    head = ListNode::build_listnode(vec![]);
+    want = ListNode::build_listnode(vec![]);
     res = Solution::reverse_list(head);
     assert_eq!(res, want);
 }

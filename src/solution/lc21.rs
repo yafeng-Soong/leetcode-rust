@@ -38,16 +38,15 @@ impl Solution {
 
 #[test]
 fn test() {
-    use crate::utils::listnode::build_listnode;
     struct Test {
         list1: Option<Box<ListNode>>,
         list2: Option<Box<ListNode>>,
         res: Option<Box<ListNode>>,
     }
     let tests = vec![Test {
-        list1: build_listnode(vec![1, 2, 4]),
-        list2: build_listnode(vec![1, 3, 4]),
-        res: build_listnode(vec![1, 1, 2, 3, 4, 4]),
+        list1: ListNode::build_listnode(vec![1, 2, 4]),
+        list2: ListNode::build_listnode(vec![1, 3, 4]),
+        res: ListNode::build_listnode(vec![1, 1, 2, 3, 4, 4]),
     }];
     for test in tests {
         assert_eq!(Solution::merge_two_lists(test.list1, test.list2), test.res);
